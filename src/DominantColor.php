@@ -1,8 +1,8 @@
-<?php
+<?php  
 
 namespace Ghero\DominantColor;
 
-use \Imagick;
+// use \Imagick;
 
 class DominantColor
 {
@@ -24,7 +24,7 @@ class DominantColor
 	 *
 	 * @var string
 	 */
-	public $color;
+	private $color;
 	
 	/**
 	 * The Base64 code of the GIF image
@@ -33,7 +33,7 @@ class DominantColor
 	 *
 	 * @var string
 	 */
-	public $gif;
+	private $gif;
 	
 	
 	/**
@@ -88,9 +88,10 @@ class DominantColor
 		if (empty($color)){
 			$color = $this->color;
 		}
+		ltrim($color, '#');
 		if (strlen($color) != 6){
-			throw new \Exception('Invalid color format, color must be hex code without "#"');
-		}
+			throw new \Exception('Invalid color format, color must be full 6 digits hex code');
+		} 
 		$gif = implode( array(
 			$this->header,
 			$this->logical_screen_descriptor,
@@ -100,9 +101,82 @@ class DominantColor
 			$this->image_data,
 			$this->trailer
 		) );
-		$this->gif =  'data:image/gif;base64,' . base64_encode( hex2bin( $gif ) );
+		$this->gif = 'data:image/gif;base64,' . base64_encode( hex2bin( $gif ) );
 		
 		return $this;
 	}
-	
+
+	/**
+	 * @var $gif getter 
+	 *
+	 * @return string
+	 */
+	public function getGif(){
+		return $this->gif;
+	}
+
+	/**
+	 * Get the color in the specified format
+	 * Output options:
+	 * "hex": Hex code (ex. "#FFFFFF")
+	 * "rgb": Rgb format string (ex. "255,255,255")
+	 * "array": Rgb format as an array (ex. ['r' => 255, 'g' =>  255, 'b' => 255])
+	 * Default: plain hex code without the "#"
+	 * 
+	 * @var $color getter 
+	 *
+	 * @param string $type
+	 *
+	 * @return string|array
+	 */
+	public function getColor($type = 'string'){
+		switch ($type) {
+			case 'hex':
+				return '#' . strtoupper($this->color);	
+			break;
+			case 'rgb':
+				return $this->colorToRgbString();
+			case 'array':
+				return $this->colorToRgbArray();
+			break;	
+			default:
+				return $this->color;
+			break;
+		}
+		
+	}
+
+	/**
+	 * Convert the @var $color in Rgb string
+	 *
+	 * @return string
+	 */
+	private function colorToRgbString(){
+		list($r, $g, $b) = $this->hexToRGB($this->color);
+		return "$r, $g, $b";
+	}
+
+	/**
+	 * Convert the @var $color in Rgb array with named keys
+	 *
+	 * @return array
+	 */
+	private function colorToRgbArray(){
+		list($r, $g, $b) = $this->hexToRGB($this->color);
+		return [
+			'r' => $r, 
+			'g' => $g,
+			'b' => $b
+		];
+	}
+
+	/**
+	 * Convert the @var $color in RGB array
+	 *
+	 * @return array
+	 */
+	private function hexToRGB($color){
+		return sscanf($color, "%02x%02x%02x");
+	}
+
 }

@@ -43,15 +43,25 @@ You can then easily set this string as src attribute specifing the desired width
 <img src='data:image/gif;base64,R0lGODlhAQABAIABAI2JggAAACwAAAAAAQABAAACAkQBADs=' width='200' height='200'/>
 ```
 
-You can also get just the hex code (without the starting "#") of the dominant color using `$color = DominantColor::setColor($file)->color;`
+### Other available methods
 
-To get the base 64 encoded GIF from an hex code, just use `$gif = DominantColor::setGif($color)->gif`, remember to pass an hex code WITHOUT the starting "#"
+#### Get the color
+
+You can also get just the hex code of the dominant color using `$color = DominantColor::setColor($file)->getColor();`
+The default output will be a plain hex code without the starting "#".
+You can customize the output passing an optional parameter to the `getColor` method:
+Available outputs:
+* "hex": outputs complete hex code (ex. `#FFFFFF`)
+* "rgb": outputs Rgb format string (ex. `255,255,255`)
+* "array": outputs Rgb format as an array (ex. `['r' => 255, 'g' =>  255, 'b' => 255]`)
+
+#### get the GIF
+
+To get the base 64 encoded GIF from an hex code, just use `$gif = DominantColor::setGif($color)->getGif()`, remember to pass an hex code WITHOUT the starting "#"
 
 
 ## Todo
 
-* Create getter methods for $color and $gif with multiple output options for $color (RGB array)
-* Allow passing an hex code with "#"
 * Add GD and Gmagick support
 
 
