@@ -55,7 +55,7 @@ Available outputs:
 * "rgb": outputs Rgb format string (ex. `255,255,255`)
 * "array": outputs Rgb format as an array (ex. `['r' => 255, 'g' =>  255, 'b' => 255]`)
 
-#### get the GIF
+#### Get the GIF
 
 To get the base 64 encoded GIF from an hex code, just use `$gif = DominantColor::setGif($color)->getGif()`, remember to pass an hex code WITHOUT the starting "#"
 
