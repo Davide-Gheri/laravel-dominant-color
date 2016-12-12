@@ -1,0 +1,23 @@
+{
+    "name": "ghero/laravel-dominant-color",
+    "description": "A package that generates a base64 encoded GIF with the dominant color of the given image (for lazy loading use)",
+    "keywords": ["dominant color", "lazy load", "laravel 5"],
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Davide Gheri",
+            "email": "davide.gheri@fl-graphics.com"
+        }
+    ],
+    "require": {
+    	"php": ">=5.4.0",
+    	"ext-imagick": "*"
+    },
+    "autoload": {
+    	"psr-0": {
+    		"Ghero\\DominantColor\\": "src/"
+    	}	
+    },
+    "minimum-stability": "dev"
+}
