@@ -2,7 +2,7 @@
 
 namespace Ghero\DominantColor;
 
-// use \Imagick;
+ use \Imagick;
 
 class DominantColor
 {
