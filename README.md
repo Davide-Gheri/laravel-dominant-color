@@ -12,7 +12,7 @@ Require the package via composer
 composer require ghero/laravel-dominant-color
 ```
 Include the service provider within your providers in `config/app.php`.
-```
+```php
 'providers' => [
     ...
     Ghero\DominantColor\DominantColorServiceProvider::class,
@@ -21,7 +21,7 @@ Include the service provider within your providers in `config/app.php`.
 ```
 
 Next, add the class alias to the aliases array of `config/app.php`.
-```
+```php
 'aliases' => [
     ...
     'DominantColor' => Ghero\DominantColor\Facades\DominantColor::class,
