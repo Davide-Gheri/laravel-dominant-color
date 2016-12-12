@@ -39,7 +39,7 @@ The GIF is only 1 color, the dominant color of the image
 
 You can then easily set this string as src attribute specifing the desired width and height:
 
-```
+```html
 <img src='data:image/gif;base64,R0lGODlhAQABAIABAI2JggAAACwAAAAAAQABAAACAkQBADs=' width='200' height='200'/>
 ```
 
